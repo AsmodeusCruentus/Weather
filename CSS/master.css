@@ -1,0 +1,203 @@
+/* 🟢 General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* 🟢 Full-Screen Background */
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="50" fill="%23b3e5fc"/><rect y="50" width="100" height="50" fill="%234CAF50"/></svg>');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+
+
+.kid-container img {
+    width: auto;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+
+/* 🟢 Kids (Weather-Based SVG) */
+#kids_rain {
+    position: absolute;
+    top: 40vh;
+    left: 50%;
+    height: auto;
+    width: 30vw;  /* Adjusted to be proportional */
+    transform: translateX(-50%);
+    display: none;
+    z-index: 2; /* Same as kids_snow */
+}
+
+#kids_rain img {
+    width: 100%;
+    height: auto;
+}
+
+/* 🟢 Kids raindrops (Weather-Based CSS + Anime.js) */
+.raindrop {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: blue;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* 🟢 Kids (Weather-Based SVG) */
+#kids_snow {
+    position: absolute;
+    top: 40vh;
+    left: 50%;
+    height: auto;
+    width: 30vw;  /* Adjusted to be proportional */
+    transform: translateX(-50%);
+    display: none;
+    z-index: 2;
+}
+
+#kids_snow img {
+    width: 100%;
+    height: auto;
+}
+
+/* 🟢 Kids raindrops (Weather-Based CSS + Anime.js) */
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* 🟢 Kids (Weather-Based SVG) */
+#kids {
+    position: absolute;
+    top: 40vh;
+    left: 50%;
+    height: auto;
+    width: 30vw;  /* Adjusted to be proportional */
+    transform: translateX(-50%);
+    display: none;
+    z-index: 2; /* Same as kids_snow */
+}
+
+#kids img {
+    width: 100%;
+    height: auto;
+}
+
+/* 🟢 Sun & Moon */
+#sun, #moon {
+    position: absolute;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    z-index: 4;
+    display: block !important;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+/* Glow effect */
+#sun {
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    box-shadow: 0 0 50px rgba(255, 200, 0, 0.8);
+}
+
+#moon {
+    background: radial-gradient(circle, #E0E0E0, #A9A9A9);
+    box-shadow: 0 0 30px rgba(200, 200, 255, 0.5);
+}
+
+/* 🟢 Weather Effects */
+#rain-container, #snow-container, #clouds-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 6;
+    pointer-events: none; /* So they don't interfere with interaction */
+}
+
+/* 🟢 Light Overlay (Day/Night Gradient) */
+#light-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.4), rgba(0, 0, 0, 0.5));
+    transition: background 1s linear;
+}
+
+/* 🟢 Info Box (For Weather Data) */
+#weather-info {
+    position: absolute;
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 2vh;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    font-size: 4vw;
+    border-radius: 1vh;
+    z-index: 7;
+}
+
+/* Tablet & Desktop Scaling */
+
+/* 🔹 Tablet (768px and up) */
+@media screen and (min-width: 768px) {
+    #kids_rain, #kids_snow {
+        width: 25vw;
+        bottom: 7vh;
+    }
+
+    #sun, #moon {
+        width: 10vw;
+    }
+
+    #weather-info {
+        font-size: 3vw;
+        width: 80%;
+    }
+}
+
+/* 🔹 Desktop (1024px and up) */
+@media screen and (min-width: 1024px) {
+    #kids_rain, #kids_snow {
+        width: 20vw;
+        bottom: 10vh;
+    }
+
+    #sun, #moon {
+        width: 8vw;
+    }
+
+    #weather-info {
+        font-size: 2vw;
+        width: 70%;
+    }
+}
