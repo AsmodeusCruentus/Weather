@@ -1,3 +1,5 @@
+// entire thing was so massivley re-written after looking at a previous work example of another student a year ago, +rep to that dude!
+
 document.addEventListener("DOMContentLoaded", function () {
     // select html elements for weather information and other things such as sun/moon and morreeee
     const weatherInfo = document.getElementById("weather-info");
