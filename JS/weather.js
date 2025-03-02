@@ -1,24 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // select html elements for weather information and other things such as sun/moon and morreeee
     const weatherInfo = document.getElementById("weather-info");
     const sun = document.getElementById("sun");
     const moon = document.getElementById("moon");
     const lightOverlay = document.getElementById("light-overlay");
     const rainContainer = document.getElementById("rain-container");
     const snowContainer = document.getElementById("snow-container");
-
+    const cloudsContainer = document.getElementByID("clouds-container"); // not fully implemented
+    
+    // variables tyo track weather conditions
     let isSnowing = false;
     let isRaining = false;
     let isCloudy = false;
 
+    // functions to fetch weather data using geolocation
     function fetchWeatherData() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-
+                    
+                    // openweather API request URL 
                     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9b283e1a9cd6408eed35628558e72f90`;
 
+                    // fetches Weather data and updates the UI with the corresponding information
                     fetch(apiUrl)
                         .then(response => response.json())
                         .then(data => updateWeather(data))
@@ -30,16 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Geolocation is not supported.");
         }
     }
-    
+
+    // ui updated basing information of fetched weather data
     function updateWeather(data) {
         const temperature = (data.main.temp - 273.15).toFixed(1); // Convert Kelvin to Celsius
         const weatherType = data.weather[0].main;
-        const windSpeed = data.wind.speed;
-        const sunrise = data.sys.sunrise;
+        const windSpeed = data.wind.speed; // windspeed used is meters per second cause ísland...
+        const sunrise = data.sys.sunrise; // sunrise and sunset time is bricked...
         const sunset = data.sys.sunset;
         const currentTime = Math.floor(Date.now() / 1000);
 
-        // Handle Rain/Snow
+        // Handle Rain/Snow/and everything else i need to add
         isSnowing = weatherType === "Snow";
         isRaining = weatherType === "Rain" || weatherType === "Mist";
         isCloudy = weatherType === "Clouds";
@@ -50,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const kidsCloud = document.getElementById("kids_cloud");
 
         
-        // Toggle visibility based on weather
+        // Toggle visibility based on weather info
         if (isRaining) {
             kidsRain.style.display = "block";
             kidsSnow.style.display = "none";
@@ -92,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         moon.style.top = `${moonY}px`;
 
         // Update brightness
+        // oh yeah, if only it worked better than it does, calculates the sun and moon position based on time of day
         let brightness = 1 - Math.abs(0.5 - dayProgress) * 2;
         lightOverlay.style.background = `radial-gradient(circle, rgba(255, 255, 200, ${brightness * 0.4}), rgba(0, 0, 0, ${1 - brightness}))`;
 
@@ -100,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         snowContainer.style.display = isSnowing ? "block" : "none";
         cloudsContainer.style.display = isCloudy ? "block" : "none";
     }
-
+    // this thing is supposed to properly animate the sun and moon movement, but does it? fuck no....
     function updateCycle(sunrise, sunset, moonrise, moonset) {
         let now = new Date();
         let hours = now.getHours() + now.getMinutes() / 60;
