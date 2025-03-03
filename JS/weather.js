@@ -8,12 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const lightOverlay = document.getElementById("light-overlay");
     const rainContainer = document.getElementById("rain-container");
     const snowContainer = document.getElementById("snow-container");
-//    const cloudsContainer = document.getElementById("clouds-container"); // not fully implemented
     
     // variables tyo track weather conditions
     let isSnowing = false;
     let isRaining = false;
-    let isCloudy = false;
 
     // functions to fetch weather data using geolocation
     function fetchWeatherData() {
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Handle Rain/Snow/and everything else i need to add
         isSnowing = weatherType === "Snow";
         isRaining = weatherType === "Rain" || weatherType === "Mist";
-        isCloudy = weatherType === "Clouds";
 
         // Select Kid SVG elements
         const kidsRain = document.getElementById("kids_rain");
@@ -108,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         rainContainer.style.display = isRaining ? "block" : "none";
         snowContainer.style.display = isSnowing ? "block" : "none";
-        cloudsContainer.style.display = isCloudy ? "block" : "none";
     }
     // this thing is supposed to properly animate the sun and moon movement, but does it? fuck no....
     function updateCycle(sunrise, sunset, moonrise, moonset) {
@@ -179,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(() => {
         if (isRaining) createWeatherEffect(rainContainer, "raindrop");
         if (isSnowing) createWeatherEffect(snowContainer, "snowflake");
-        if (isCloudy) createWeatherEffect(cloudsContainer, "cloud");
     }, 50);
 
     fetchWeatherData();
