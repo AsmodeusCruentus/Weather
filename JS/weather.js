@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lightOverlay = document.getElementById("light-overlay");
     const rainContainer = document.getElementById("rain-container");
     const snowContainer = document.getElementById("snow-container");
-    const cloudsContainer = document.getElementByID("clouds-container"); // not fully implemented
+    const cloudsContainer = document.getElementById("clouds-container"); // not fully implemented
     
     // variables tyo track weather conditions
     let isSnowing = false;
